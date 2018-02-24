@@ -11,6 +11,8 @@ import uk.co.ribot.androidboilerplate.ui.base.BasePresenter;
 
 public class ProfilePresenter extends BasePresenter<ProfileView> {
 
+    private Profile profile;
+
     @Inject
     public ProfilePresenter() {}
 
@@ -18,6 +20,8 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
         if (profile == null) {
             getMvpView().showError("failed to set up profile info");
         }
+
+        this.profile = profile;
 
         getMvpView().setToolbarColor(profile.hexColor());
         if (!TextUtils.isEmpty(profile.avatar())) {
@@ -31,5 +35,9 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
             getMvpView().setBio(profile.bio());
         }
         getMvpView().setActive(profile.active());
+    }
+
+    public void handleEmailClick() {
+        getMvpView().launchEmailApp(profile.email());
     }
 }

@@ -1,7 +1,9 @@
 package uk.co.ribot.androidboilerplate.ui.profile;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -51,6 +53,13 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
 
         Profile profile = getIntent().getParcelableExtra(EXTRA_PROFILE);
         presenter.setUpProfile(profile);
+
+        emailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.handleEmailClick();
+            }
+        });
     }
 
     @Override
@@ -96,6 +105,17 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     public void setActive(boolean active) {
         // for some reason ribot service returns false for isActive property for all profiles
 //        emailButton.setVisibility(active ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void launchEmailApp(String email) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Heya!");
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     @Override

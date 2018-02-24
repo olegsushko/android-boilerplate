@@ -12,5 +12,7 @@ public interface ProfileView extends MvpView {
     void setBirthDate(String birthDate);
     void setActive(boolean active);
 
+    void launchEmailApp(String email);
+
     void showError(String message);
 }
