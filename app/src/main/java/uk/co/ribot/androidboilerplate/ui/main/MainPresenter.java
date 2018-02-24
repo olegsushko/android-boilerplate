@@ -4,10 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 import uk.co.ribot.androidboilerplate.data.DataManager;
@@ -41,35 +40,26 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     public void loadRibots() {
         checkViewAttached();
         RxUtil.dispose(mDisposable);
-        mDataManager.getRibots()
+        mDisposable = mDataManager.getRibots()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<List<Ribot>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        mDisposable = d;
-                    }
-
-                    @Override
-                    public void onNext(@NonNull List<Ribot> ribots) {
-                        if (ribots.isEmpty()) {
-                            getMvpView().showRibotsEmpty();
-                        } else {
-                            getMvpView().showRibots(ribots);
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Timber.e(e, "There was an error loading the ribots.");
-                        getMvpView().showError();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+                .subscribe(new Consumer<List<Ribot>>() {
+                               @Override
+                               public void accept(List<Ribot> ribots) throws Exception {
+                                   if (ribots.isEmpty()) {
+                                       getMvpView().showRibotsEmpty();
+                                   } else {
+                                       getMvpView().showRibots(ribots);
+                                   }
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) throws Exception {
+                                   Timber.e(throwable, "There was an error loading the ribots.");
+                                   getMvpView().showError();
+                               }
+                           }
+                );
     }
 
 }
