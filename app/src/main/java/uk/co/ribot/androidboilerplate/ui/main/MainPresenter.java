@@ -10,6 +10,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 import uk.co.ribot.androidboilerplate.data.DataManager;
+import uk.co.ribot.androidboilerplate.data.model.Profile;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
 import uk.co.ribot.androidboilerplate.injection.ConfigPersistent;
 import uk.co.ribot.androidboilerplate.ui.base.BasePresenter;
@@ -62,8 +63,8 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                 );
     }
 
-    public void handleItemClick(Ribot ribot) {
-        getMvpView().launchRibotDetail(ribot);
+    public void handleItemClick(Profile profile) {
+        getMvpView().launchRibotDetail(profile);
     }
 
 }

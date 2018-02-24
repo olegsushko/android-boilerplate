@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray"
     android:fitsSystemWindows="true"
-    tools:context=".ui.detail.DetailActivity">
+    tools:context=".ui.profile.ProfileActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -23,8 +23,8 @@
             app:expandedTitleMarginEnd="64dp"
             android:fitsSystemWindows="true">
 
-            <com.antonioleiva.materializeyourapp.SquareImageView
-                android:id="@+id/image"
+            <ImageView
+                android:id="@+id/image_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -53,7 +53,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/text_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/text_birth_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/text_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 

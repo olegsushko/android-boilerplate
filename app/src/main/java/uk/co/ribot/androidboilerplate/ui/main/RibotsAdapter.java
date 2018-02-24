@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
+import uk.co.ribot.androidboilerplate.data.model.Profile;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
 import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
 
@@ -30,7 +31,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
     private List<Ribot> mRibots;
     private Context context;
 
-    private RibotItemClickListener itemClickListener;
+    private ProfileItemClickListener itemClickListener;
 
     @Inject
     public RibotsAdapter(@ApplicationContext final Context context) {
@@ -38,7 +39,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
         mRibots = new ArrayList<>();
     }
 
-    public void setItemClickListener(RibotItemClickListener itemClickListener) {
+    public void setItemClickListener(ProfileItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
@@ -56,19 +57,18 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
 
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, int position) {
-        final Ribot ribot = mRibots.get(position);
+        final Profile profile = mRibots.get(position).profile();
 
-        holder.hexColorView.setBackgroundColor(Color.parseColor(ribot.profile().hexColor()));
         holder.nameTextView.setText(String.format("%s %s",
-                ribot.profile().name().first(), ribot.profile().name().last()));
-        holder.emailTextView.setText(ribot.profile().email());
+                profile.name().first(), profile.name().last()));
+        holder.emailTextView.setText(profile.email());
 
-        holder.loadAvatar(ribot.profile().avatar());
+        holder.loadAvatar(profile.avatar());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onItemClick(ribot);
+                itemClickListener.onItemClick(profile);
             }
         });
     }

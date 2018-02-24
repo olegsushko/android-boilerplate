@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,12 +15,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.SyncService;
+import uk.co.ribot.androidboilerplate.data.model.Profile;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
-import uk.co.ribot.androidboilerplate.ui.detail.DetailActivity;
+import uk.co.ribot.androidboilerplate.ui.profile.ProfileActivity;
 import uk.co.ribot.androidboilerplate.util.DialogFactory;
 
-public class MainActivity extends BaseActivity implements MainMvpView, RibotItemClickListener {
+public class MainActivity extends BaseActivity implements MainMvpView, ProfileItemClickListener {
 
     private static final String EXTRA_TRIGGER_SYNC_FLAG =
             "uk.co.ribot.androidboilerplate.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG";
@@ -88,13 +88,13 @@ public class MainActivity extends BaseActivity implements MainMvpView, RibotItem
     }
 
     @Override
-    public void onItemClick(Ribot ribot) {
-        mMainPresenter.handleItemClick(ribot);
+    public void onItemClick(Profile profile) {
+        mMainPresenter.handleItemClick(profile);
     }
 
-    public void launchRibotDetail(Ribot ribot) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_RIBOT, ribot);
+    public void launchRibotDetail(Profile profile) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra(ProfileActivity.EXTRA_PROFILE, profile);
         startActivity(intent);
     }
 }
