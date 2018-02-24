@@ -2,8 +2,11 @@ package uk.co.ribot.androidboilerplate.ui.profile;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,11 +25,14 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
 
     public static String EXTRA_PROFILE = "profile";
 
+    @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.image_avatar) ImageView avatarImage;
     @BindView(R.id.text_full_name) TextView fullNameText;
     @BindView(R.id.text_birth_date) TextView birthDateText;
     @BindView(R.id.text_email) TextView emailText;
     @BindView(R.id.text_bio) TextView bioText;
+    @BindView(R.id.button_email) FloatingActionButton emailButton;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Inject
     ProfilePresenter presenter;
@@ -34,9 +40,13 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.ProfileTheme);
         activityComponent().inject(this);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         presenter.attachView(this);
 
@@ -52,7 +62,13 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
 
     @Override
     public void setToolbarColor(String hexColor) {
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(hexColor)));
+        toolbar.setBackgroundColor(Color.parseColor(hexColor));
+    }
+
+    @Override
+    public void setCollapsingToolbarColor(String hexColor) {
+        collapsingToolbarLayout.setContentScrimColor(Color.parseColor(hexColor));
+        collapsingToolbarLayout.setStatusBarScrimColor(Color.parseColor(hexColor));
     }
 
     @Override
@@ -64,7 +80,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
 
     @Override
     public void setFullName(String fullName) {
-        fullNameText.setText(fullName);
+        getSupportActionBar().setTitle(fullName);
     }
 
     @Override
@@ -80,6 +96,12 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     @Override
     public void setBirthDate(String birthDate) {
         birthDateText.setText(birthDate);
+    }
+
+    @Override
+    public void setActive(boolean active) {
+        // for some reason ribot service returns false for isActive property for all profiles
+//        emailButton.setVisibility(active ? View.VISIBLE : View.GONE);
     }
 
     @Override
