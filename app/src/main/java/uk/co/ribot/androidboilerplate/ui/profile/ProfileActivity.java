@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.ribot.androidboilerplate.BoilerplateApplication;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.model.Profile;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
@@ -77,7 +78,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
 
     @Override
     public void setImage(String url) {
-        Picasso.with(this)
+        Picasso.with(BoilerplateApplication.get(this))
                 .load(url)
                 .into(avatarImage);
     }
