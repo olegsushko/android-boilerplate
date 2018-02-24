@@ -73,7 +73,6 @@ public class MainActivity extends BaseActivity implements MainMvpView, RibotItem
     @Override
     public void showRibots(List<Ribot> ribots) {
         mRibotsAdapter.setRibots(ribots);
-        mRibotsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -85,7 +84,6 @@ public class MainActivity extends BaseActivity implements MainMvpView, RibotItem
     @Override
     public void showRibotsEmpty() {
         mRibotsAdapter.setRibots(Collections.<Ribot>emptyList());
-        mRibotsAdapter.notifyDataSetChanged();
         showMessage(getString(R.string.empty_ribots));
     }
 

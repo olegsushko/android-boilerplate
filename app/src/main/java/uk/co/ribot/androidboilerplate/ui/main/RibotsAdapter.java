@@ -44,6 +44,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
 
     public void setRibots(List<Ribot> ribots) {
         mRibots = ribots;
+        notifyDataSetChanged();
     }
 
     @Override
