@@ -30,10 +30,16 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
     private List<Ribot> mRibots;
     private Context context;
 
+    private RibotItemClickListener itemClickListener;
+
     @Inject
     public RibotsAdapter(@ApplicationContext final Context context) {
         this.context = context;
         mRibots = new ArrayList<>();
+    }
+
+    public void setItemClickListener(RibotItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 
     public void setRibots(List<Ribot> ribots) {
@@ -49,7 +55,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
 
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, int position) {
-        Ribot ribot = mRibots.get(position);
+        final Ribot ribot = mRibots.get(position);
 
         holder.hexColorView.setBackgroundColor(Color.parseColor(ribot.profile().hexColor()));
         holder.nameTextView.setText(String.format("%s %s",
@@ -57,6 +63,13 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
         holder.emailTextView.setText(ribot.profile().email());
 
         holder.loadAvatar(ribot.profile().avatar());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onItemClick(ribot);
+            }
+        });
     }
 
     @Override

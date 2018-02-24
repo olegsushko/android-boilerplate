@@ -13,4 +13,5 @@ public interface MainMvpView extends MvpView {
 
     void showError();
 
+    void launchRibotInfo(Ribot ribot);
 }

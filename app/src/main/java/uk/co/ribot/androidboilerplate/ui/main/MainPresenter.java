@@ -62,4 +62,8 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                 );
     }
 
+    public void handleItemClick(Ribot ribot) {
+        getMvpView().launchRibotInfo(ribot);
+    }
+
 }
