@@ -135,6 +135,8 @@ dependencies {
     testAnnotationProcessor daggerCompiler
     androidTestAnnotationProcessor daggerCompiler
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     // Instrumentation test dependencies
     androidTestCompile jUnit
     androidTestCompile mockito
