@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, RibotItem
         mMainPresenter.handleItemClick(ribot);
     }
 
-    public void launchRibotInfo(Ribot ribot) {
+    public void launchRibotDetail(Ribot ribot) {
 
     }
 }
