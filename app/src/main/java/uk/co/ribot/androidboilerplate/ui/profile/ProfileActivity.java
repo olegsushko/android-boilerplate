@@ -27,7 +27,6 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
 
     @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.image_avatar) ImageView avatarImage;
-    @BindView(R.id.text_full_name) TextView fullNameText;
     @BindView(R.id.text_birth_date) TextView birthDateText;
     @BindView(R.id.text_email) TextView emailText;
     @BindView(R.id.text_bio) TextView bioText;
@@ -62,11 +61,6 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
 
     @Override
     public void setToolbarColor(String hexColor) {
-        toolbar.setBackgroundColor(Color.parseColor(hexColor));
-    }
-
-    @Override
-    public void setCollapsingToolbarColor(String hexColor) {
         collapsingToolbarLayout.setContentScrimColor(Color.parseColor(hexColor));
         collapsingToolbarLayout.setStatusBarScrimColor(Color.parseColor(hexColor));
     }
