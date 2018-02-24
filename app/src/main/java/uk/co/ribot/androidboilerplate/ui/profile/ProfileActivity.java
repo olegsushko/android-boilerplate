@@ -34,6 +34,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     @BindView(R.id.text_birth_date) TextView birthDateText;
     @BindView(R.id.text_email) TextView emailText;
     @BindView(R.id.text_bio) TextView bioText;
+    @BindView(R.id.container_bio) View bioContainerView;
     @BindView(R.id.button_email) FloatingActionButton emailButton;
     @BindView(R.id.toolbar) Toolbar toolbar;
 
@@ -96,6 +97,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView {
     @Override
     public void setBio(String bio) {
         bioText.setText(bio);
+        bioContainerView.setVisibility(View.VISIBLE);
     }
 
     @Override
