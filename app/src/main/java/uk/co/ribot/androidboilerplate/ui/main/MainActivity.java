@@ -18,6 +18,7 @@ import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.SyncService;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity;
+import uk.co.ribot.androidboilerplate.ui.detail.DetailActivity;
 import uk.co.ribot.androidboilerplate.util.DialogFactory;
 
 public class MainActivity extends BaseActivity implements MainMvpView, RibotItemClickListener {
@@ -85,7 +86,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, RibotItem
     public void showRibotsEmpty() {
         mRibotsAdapter.setRibots(Collections.<Ribot>emptyList());
         mRibotsAdapter.notifyDataSetChanged();
-        Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show();
+        showMessage(getString(R.string.empty_ribots));
     }
 
     @Override
@@ -94,6 +95,8 @@ public class MainActivity extends BaseActivity implements MainMvpView, RibotItem
     }
 
     public void launchRibotDetail(Ribot ribot) {
-
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_RIBOT, ribot);
+        startActivity(intent);
     }
 }

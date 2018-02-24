@@ -3,6 +3,7 @@ package uk.co.ribot.androidboilerplate.ui.base;
 import android.os.Bundle;
 import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -68,4 +69,8 @@ public class BaseActivity extends AppCompatActivity {
         return mActivityComponent;
     }
 
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT)
+                .show();
+    }
 }

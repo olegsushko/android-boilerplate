@@ -3,6 +3,7 @@ package uk.co.ribot.androidboilerplate.util;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
@@ -28,10 +29,15 @@ public final class DialogFactory {
     }
 
     public static Dialog createGenericErrorDialog(Context context, String message) {
+        return createGenericErrorDialog(context, message, null);
+    }
+
+    public static Dialog createGenericErrorDialog(Context context, String message,
+                                                  DialogInterface.OnClickListener okButtonListener) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.dialog_error_title))
                 .setMessage(message)
-                .setNeutralButton(R.string.dialog_action_ok, null);
+                .setNeutralButton(R.string.dialog_action_ok, okButtonListener);
         return alertDialog.create();
     }
 
