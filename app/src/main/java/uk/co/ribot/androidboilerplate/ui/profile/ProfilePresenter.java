@@ -19,19 +19,20 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
     public void setUpProfile(Profile profile) {
         if (profile == null) {
             getMvpView().showError("failed to set up profile info");
+            return;
         }
 
         this.profile = profile;
 
         getMvpView().setToolbarColor(profile.hexColor());
-        if (!TextUtils.isEmpty(profile.avatar())) {
+        if (profile.avatar() != null && !profile.avatar().isEmpty()) {
             getMvpView().setImage(profile.avatar());
         }
 
         getMvpView().setFullName(profile.name().first() + " " + profile.name().last());
         getMvpView().setBirthDate(new SimpleDateFormat("dd MMM yyyy").format(profile.dateOfBirth()));
         getMvpView().setEmail(profile.email());
-        if (!TextUtils.isEmpty(profile.bio())) {
+        if (profile.bio() != null && !profile.bio().isEmpty()) {
             getMvpView().setBio(profile.bio());
         }
         getMvpView().setActive(profile.active());
