@@ -2,6 +2,8 @@ package uk.co.ribot.androidboilerplate.ui.profile;
 
 import android.text.TextUtils;
 
+import java.text.SimpleDateFormat;
+
 import javax.inject.Inject;
 
 import uk.co.ribot.androidboilerplate.data.model.Profile;
@@ -23,7 +25,7 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
         }
 
         getMvpView().setFullName(profile.name().first() + " " + profile.name().last());
-        getMvpView().setBirthDate(profile.dateOfBirth().toString());
+        getMvpView().setBirthDate(new SimpleDateFormat("dd MMM yyyy").format(profile.dateOfBirth()));
         getMvpView().setEmail(profile.email());
         if (!TextUtils.isEmpty(profile.bio())) {
             getMvpView().setBio(profile.bio());
