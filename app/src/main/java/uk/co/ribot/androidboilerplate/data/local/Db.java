@@ -22,6 +22,7 @@ public class Db {
         public static final String COLUMN_DATE_OF_BIRTH = "date_of_birth";
         public static final String COLUMN_AVATAR = "avatar";
         public static final String COLUMN_BIO = "bio";
+        public static final String COLUMN_ACTIVE = "active";
 
         public static final String CREATE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
@@ -31,8 +32,11 @@ public class Db {
                         COLUMN_HEX_COLOR + " TEXT NOT NULL, " +
                         COLUMN_DATE_OF_BIRTH + " INTEGER NOT NULL, " +
                         COLUMN_AVATAR + " TEXT, " +
-                        COLUMN_BIO + " TEXT" +
+                        COLUMN_BIO + " TEXT, " +
+                        COLUMN_ACTIVE + " INTEGER NOT NULL" +
                 " ); ";
+
+        public static final String DROP = "DROP TABLE IF EXISTS " + Db.RibotProfileTable.TABLE_NAME;
 
         public static ContentValues toContentValues(Profile profile) {
             ContentValues values = new ContentValues();
@@ -43,6 +47,7 @@ public class Db {
             values.put(COLUMN_DATE_OF_BIRTH, profile.dateOfBirth().getTime());
             values.put(COLUMN_AVATAR, profile.avatar());
             if (profile.bio() != null) values.put(COLUMN_BIO, profile.bio());
+            values.put(COLUMN_ACTIVE, (profile.active()) ? 1 : 0);
             return values;
         }
 
@@ -52,6 +57,8 @@ public class Db {
                     cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LAST_NAME)));
             long dobTime = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_DATE_OF_BIRTH));
 
+            boolean active = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ACTIVE)) == 1;
+
             return Profile.builder()
                     .setName(name)
                     .setEmail(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)))
@@ -59,6 +66,7 @@ public class Db {
                     .setDateOfBirth(new Date(dobTime))
                     .setAvatar(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_AVATAR)))
                     .setBio(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIO)))
+                    .setActive(active)
                     .build();
         }
     }

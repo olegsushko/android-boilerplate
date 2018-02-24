@@ -17,6 +17,7 @@ public abstract class Profile implements Parcelable {
     public abstract Date dateOfBirth();
     @Nullable public abstract String bio();
     @Nullable public abstract String avatar();
+    public abstract boolean active();
 
     public static Builder builder() {
         return new AutoValue_Profile.Builder();
@@ -34,6 +35,7 @@ public abstract class Profile implements Parcelable {
         public abstract Builder setDateOfBirth(Date dateOfBirth);
         public abstract Builder setBio(String bio);
         public abstract Builder setAvatar(String avatar);
+        public abstract Builder setActive(boolean active);
         public abstract Profile build();
     }
 }
