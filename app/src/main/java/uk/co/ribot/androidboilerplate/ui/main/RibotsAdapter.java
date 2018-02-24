@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.ribot.androidboilerplate.R;
 import uk.co.ribot.androidboilerplate.data.model.Ribot;
+import uk.co.ribot.androidboilerplate.injection.ApplicationContext;
 
 public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewHolder> {
 
@@ -30,7 +31,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
     private Context context;
 
     @Inject
-    public RibotsAdapter(final Context context) {
+    public RibotsAdapter(@ApplicationContext final Context context) {
         this.context = context;
         mRibots = new ArrayList<>();
     }
@@ -83,6 +84,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
                             @Override
                             public void onSuccess() {
                                 hexColorView.setVisibility(View.GONE);
+                                avatarView.setVisibility(View.VISIBLE);
                             }
 
                             @Override
