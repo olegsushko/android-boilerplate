@@ -39,6 +39,7 @@ public class TestDataFactory {
                 .setHexColor("#0066FF")
                 .setAvatar("http://api.ribot.io/images/" + uniqueSuffix)
                 .setBio(randomUuid())
+                .setActive(true)
                 .build();
     }
 
