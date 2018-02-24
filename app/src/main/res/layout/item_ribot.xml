@@ -16,20 +16,11 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <View
-            android:id="@+id/view_hex_color"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="10dp"
-            android:background="@android:color/holo_blue_dark" />
-
         <ImageView
             android:id="@+id/image_avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_toRightOf="@+id/view_hex_color"
-            android:layout_marginRight="10dp"
-            android:visibility="gone" />
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:id="@+id/text_name"
