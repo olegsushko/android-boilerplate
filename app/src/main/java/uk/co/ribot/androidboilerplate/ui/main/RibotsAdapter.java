@@ -4,14 +4,12 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -63,6 +61,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
                 profile.name().first(), profile.name().last()));
         holder.emailTextView.setText(profile.email());
 
+        holder.avatarView.setBackgroundColor(Color.parseColor(profile.hexColor()));
         holder.loadAvatar(profile.avatar());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +79,6 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
 
     class RibotViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.view_hex_color) View hexColorView;
         @BindView(R.id.image_avatar) ImageView avatarView;
         @BindView(R.id.text_name) TextView nameTextView;
         @BindView(R.id.text_email) TextView emailTextView;
@@ -94,18 +92,7 @@ public class RibotsAdapter extends RecyclerView.Adapter<RibotsAdapter.RibotViewH
             if (!TextUtils.isEmpty(url)) {
                 Picasso.with(context)
                         .load(url)
-                        .into(avatarView, new Callback() {
-                            @Override
-                            public void onSuccess() {
-                                hexColorView.setVisibility(View.GONE);
-                                avatarView.setVisibility(View.VISIBLE);
-                            }
-
-                            @Override
-                            public void onError() {
-                                Log.e("Oleg", "failed to load an avatar image");
-                            }
-                        });
+                        .into(avatarView);
             }
         }
     }

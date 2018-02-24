@@ -14,5 +14,5 @@ public interface MainMvpView extends MvpView {
 
     void showError();
 
-    void launchRibotDetail(Profile profile);
+    void launchProfileScreen(Profile profile);
 }

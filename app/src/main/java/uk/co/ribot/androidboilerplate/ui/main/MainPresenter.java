@@ -64,7 +64,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     }
 
     public void handleItemClick(Profile profile) {
-        getMvpView().launchRibotDetail(profile);
+        getMvpView().launchProfileScreen(profile);
     }
 
 }

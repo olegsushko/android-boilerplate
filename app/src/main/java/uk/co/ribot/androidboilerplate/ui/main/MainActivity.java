@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, ProfileIt
         mMainPresenter.handleItemClick(profile);
     }
 
-    public void launchRibotDetail(Profile profile) {
+    public void launchProfileScreen(Profile profile) {
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra(ProfileActivity.EXTRA_PROFILE, profile);
         startActivity(intent);
